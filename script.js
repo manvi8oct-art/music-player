@@ -1,9 +1,9 @@
 let song = document.getElementById("song");
 let playBtn = document.getElementById("play");
 let songs = [
-     "songs/song1.mp3",
-     "songs/song2.mp3",
-     "songs/song3.mp3"
+     "song1.mp3",
+     "song2.mp3",
+     "song3.mp3"
 
 
 ];
