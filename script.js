@@ -9,7 +9,7 @@ let songs = [
 ];
 let CurrentSongIndex = 0;
 playBtn.addEventListener("click", () => {
-    if(song.paused) {
+   if(!isNaN(song.duration) {
         song.play();
         playBtn.innerText = "pause";
     } else{
@@ -26,10 +26,10 @@ song.addEventListener("timeupdate",() => {
     progressBar.value=progress;
     
     currentTime.innerText= formatTime(song.currentTime);
-    totalTime.innerText= formatTime(song.duration);
-    }
-   
+         song.addEventListener("loadedmetadata", () => {
+    totalTime.innerText = formatTime(song.duration);
 });
+   
 progressBar.addEventListener("input", () => {
     song.currentTime = (progressBar.value * song.duration)/100;
     progressBar.max = 100;
@@ -47,20 +47,23 @@ function loadSong(index) {
     songName.innerText = songNames[index];
 }
 
-let nextBtn = document.getElementById("next") ;
 nextBtn.addEventListener("click",() => {
     CurrentSongIndex++;
     if(CurrentSongIndex>=songs.length) {
         CurrentSongIndex=0;
     }
     loadSong(CurrentSongIndex);
+    song.play(); 
 });
+let prevBtn = document.getElementById("prev");
+
 prevBtn.addEventListener("click",() => {
     CurrentSongIndex--;
     if(CurrentSongIndex < 0) {
         CurrentSongIndex = songs.length - 1; 
     }
-    
+    loadSong(CurrentSongIndex);
+    song.play(); 
 });
     
 song.addEventListener("ended",() => {
@@ -68,7 +71,8 @@ song.addEventListener("ended",() => {
     if(CurrentSongIndex >= songs.length) { 
         CurrentSongIndex = 0;
     }
-   
+    loadSong(CurrentSongIndex);
+    song.play();
 });
 
 let currentTime = document.getElementById("currentTime");
